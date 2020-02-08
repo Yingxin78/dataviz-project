@@ -1,0 +1,23 @@
+---
+title: "dataviz-project-YZ"
+author: "Yingxin Zhang"
+date: "2/8/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load-packages, message = TRUE}
+library(tidyverse)
+```
+
+# Data merge
+```{r}
+d1 = read.table("data/student-mat.csv", sep = ",", header=TRUE)
+d2 = read.table("data/student-por.csv", sep = ",", header=TRUE)
+
+student_alcohol = merge(d1, d2, by = c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+print(nrow(student_alcohol)) # 382 students
+```
