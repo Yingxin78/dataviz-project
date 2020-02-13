@@ -13,11 +13,18 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-# Data merge
+# Data load
 ```{r}
-d1 = read.table("data/student-mat.csv", sep = ",", header=TRUE)
-d2 = read.table("data/student-por.csv", sep = ",", header=TRUE)
-
-student_alcohol = merge(d1, d2, by = c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+salc = read.table("data/student-mat.csv", sep = ",", header=TRUE)
 print(nrow(student_alcohol)) # 382 students
 ```
+# Visulize 1: Weekend Alcohol Consumption V.S. Final Grade for 2 Schools
+```{r}
+ggplot(data = salc, mapping = aes(x = Walc, y = G3, color = school, shape = school)) +
+geom_jitter(width = 0) +
+geom_point(alpha = 0.5, size = 2) +
+ggtitle("Weekend Alcohol Consumption V.S. Final Grade for 2 Schools")
+```
+## The x axis is Workday alcohol consumption (numeric: from 1 - very low to 5 - very high). The y axis is the final grade. There are 2 different schools: Gabriel Pereira (GP) and Mousinho da Silveira (MS)
+
+
