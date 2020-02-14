@@ -28,3 +28,19 @@ ggtitle("Weekend Alcohol Consumption V.S. Final Grade for 2 Schools")
 ## The x axis is Workday alcohol consumption (numeric: from 1 - very low to 5 - very high). The y axis is the final grade. There are 2 different schools: Gabriel Pereira (GP) and Mousinho da Silveira (MS)
 
 
+# Visulize 2: Alcohol Consumption with Parents's Job
+```{r}
+ggplot(data = salc, mapping = aes(x = Mjob, y = Walc, fill=factor(Walc))) +
+geom_bar(stat ="identity") +
+xlab("Mjob") +
+ylab("Count") +
+ggtitle("Alcohol Consumption with Mother's Job")
+
+ggplot(data = salc, mapping = aes(x = Fjob, y = Walc, fill=factor(Walc))) +
+geom_bar(stat ="identity") +
+xlab("Fjob") +
+ylab("Count") +
+ggtitle("Alcohol Consumption with Father's Job")
+```
+## Given parents are in different types of job, we can see the distribution of child's alcohol consumption is different.
+
