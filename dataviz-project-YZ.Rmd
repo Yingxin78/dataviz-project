@@ -3,6 +3,8 @@ title: "dataviz-project-YZ"
 author: "Yingxin Zhang"
 date: "2/8/2020"
 output: html_document
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -15,10 +17,14 @@ library(tidyverse)
 
 # Data load
 ```{r}
-salc = read.table("data/student-mat.csv", sep = ",", header=TRUE)
+salc <- read.csv("data/student-mat.csv", sep = ",", header=TRUE)
 print(nrow(salc)) # 382 students
 ```
-# Visulize 1: Weekend Alcohol Consumption V.S. Final Grade for 2 Schools
+
+## The data was obtained in a survey of students' academic credit for Math courses in secondary school. The following graphs will demonstrate the association between students' alcohol consumption and their academic achievement, as well as families' impact on students' drinking behavior.
+
+
+# Graph 1: Weekend Alcohol Consumption V.S. Final Math Grade for 2 Schools
 ```{r}
 ggplot(data = salc, mapping = aes(x = Walc, y = G3, color = school, shape = school)) +
 geom_jitter(width = 0) +
@@ -32,10 +38,11 @@ geom_point(alpha = 0.5, size = 2) +
 ggtitle("Weekend Alcohol Consumption V.S. Final Grade for 2 Schools (Drop Zero)") +
 scale_y_continuous(lim = c(1, NA))
 ```
-## The x axis is Workday alcohol consumption (numeric: from 1 - very low to 5 - very high). The y axis is the final grade. There are 2 different schools: Gabriel Pereira (GP) and Mousinho da Silveira (MS)
+
+## The x axis is student's self-reported weekend alcohol consumption, which is a categorical variable than rank from 1 - very low to 5 - very high. The y axis is the student's final grade of Math course in secondary school, which is a numeric variable that rank from 0 to 20. There are 2 different schools in the data: Gabriel Pereira (GP) and Mousinho da Silveira (MS). The scatter plots above show that students' alcohol consumption are negatively associated with their final grade of Math courses. Students who seldom drink are likely to have higher academic achievement at school.In general, the students of GP perform better at school. It seems to be unreasonable that nearly one tenth of the observations always get zero credit in Math examination, so I dropped all the observations with zero credit by adjusting the scale and made another graph. In sum, alcohol consumption should be linked not only to a multitude of adverse consequences with respect to health and social harm,  but also to its negative impacts on students' school performance.
 
 
-# Visulize 2: Alcohol Consumption with Parents's Job
+# Graph 2: Alcohol Consumption with Parents's Job
 ```{r}
 ggplot(data = salc, mapping = aes(x = Mjob, y = Walc, fill=factor(Walc))) +
 geom_bar(stat ="identity") +
@@ -49,19 +56,21 @@ xlab("Fjob") +
 ylab("Count") +
 ggtitle("Alcohol Consumption with Father's Job")
 ```
-## Given parents are in different types of job, we can see the distribution of child's alcohol consumption is different.
+
+## The x axis is parent's occupation, which is a nominal variable thatincludes the category of 'teacher', 'health' care related occupations, civil 'services' (e.g. administrative or police), work 'at_home' or 'other'. The y axis is student's self-reported weekend alcohol consumption. Given the differnece in parent's job, it is obvious that the distribution of student's alcohol consumption is different. Students whose parents are teacher or work in health care related occupations are less likely to consume alcohol. Students whose parents work as civil servent in other industry are more likely to consume alcohol. To be noticed, students who have their father stay at home are much less likely to drink than those who have their mother stay at home. Therefore, parental control appears to be a strong influence on adolescent alcohol consumption.
 
 
-# Visulize 3: Alcohol Consumption in different Schools
+# Graph 3: Alcohol Consumption in different Schools
 ```{r}
 ggplot(data = salc, mapping = aes(x = Walc, fill=school)) +
 geom_density(alpha=0.3, adjust = 1) +
 ggtitle("Alcohol Consumption in different Schools")
 ```
-## Gabriel Pereira (GP) has more students with little alcohol consumption
+
+## The density graph of the students' alcohol consumtion within the two schools tells us that students in MS generally consume more alcohol than those in GP. Also, GP has more students with little alcohol consumption. From graph 1, we've learned that students in GP generally have higher academic achivements. This drives to the conclusion that drinking does negatively affect students' academic performance. Thus, school contributed significantly to the variation in drinking among students and played an important role in predicting alcohol consumption among its students. 
 
 
-# Visulize 4: Alcohol Consumption Satistics with different Family Relationship 
+# Graph 4: Alcohol Consumption Satistics with different Family Relationship 
 ```{r}
 ggplot(data = salc, mapping = aes(x = famrel, y = Walc, group = famrel, color = factor(famrel))) +
 geom_boxplot() + 
@@ -73,4 +82,8 @@ geom_boxplot() +
 scale_y_log10() + 
 ggtitle("Alcohol Consumption Satistics with different Family Relationship (log Ver.)")
 ```
-## Quality of family relationships (numeric: from 1 - very bad to 5 - excellent) is slightly relavent to alcohol consumption. The better relatiobship, the less alcolhol comsumption.
+## The x axis is the quality of family relationships, which is a categorical variable than rank from 1 - very bad to 5 - excellent. The y axis is student's self-reported weekend alcohol consumption. The box charts above show that student's alcohol consumption is negatively associated with family's environmental "climate". The better the relationship with their family, the less alcolhol they are likely to consume. So, the parent-child relationship plays an important role in shaping student's drinking behavior.
+
+# Conclusion
+
+## To sum up, drinking is harmful for secondary school students. But the pattern of adolescent drinking is predictable. Family and/or peer behavioral patterns appear to be a strong influence on adolescent alcohol consumption. It is important for secondary schools to implement alcohol policies to reduce alcohol misuse. And the assist of family through parental control and notification should not be neglect.
