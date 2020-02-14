@@ -16,7 +16,7 @@ library(tidyverse)
 # Data load
 ```{r}
 salc = read.table("data/student-mat.csv", sep = ",", header=TRUE)
-print(nrow(student_alcohol)) # 382 students
+print(nrow(salc)) # 382 students
 ```
 # Visulize 1: Weekend Alcohol Consumption V.S. Final Grade for 2 Schools
 ```{r}
@@ -43,4 +43,15 @@ ylab("Count") +
 ggtitle("Alcohol Consumption with Father's Job")
 ```
 ## Given parents are in different types of job, we can see the distribution of child's alcohol consumption is different.
+
+
+# Visulize 3: Alcohol Consumption in different Schools
+```{r}
+ggplot(data = salc, mapping = aes(x = Walc, fill=school)) +
+geom_density(alpha=0.3, adjust = 1) +
+ggtitle("Alcohol Consumption in different Schools")
+```
+## Gabriel Pereira (GP) has more students with little alcohol consumption
+
+
 
