@@ -23,7 +23,14 @@ print(nrow(salc)) # 382 students
 ggplot(data = salc, mapping = aes(x = Walc, y = G3, color = school, shape = school)) +
 geom_jitter(width = 0) +
 geom_point(alpha = 0.5, size = 2) +
-ggtitle("Weekend Alcohol Consumption V.S. Final Grade for 2 Schools")
+ggtitle("Weekend Alcohol Consumption V.S. Final Grade for 2 Schools") +
+scale_y_continuous(lim = c(0, NA))
+
+ggplot(data = salc, mapping = aes(x = Walc, y = G3, color = school, shape = school)) +
+geom_jitter(width = 0) +
+geom_point(alpha = 0.5, size = 2) +
+ggtitle("Weekend Alcohol Consumption V.S. Final Grade for 2 Schools") +
+scale_y_continuous(lim = c(1, NA))
 ```
 ## The x axis is Workday alcohol consumption (numeric: from 1 - very low to 5 - very high). The y axis is the final grade. There are 2 different schools: Gabriel Pereira (GP) and Mousinho da Silveira (MS)
 
@@ -52,6 +59,5 @@ geom_density(alpha=0.3, adjust = 1) +
 ggtitle("Alcohol Consumption in different Schools")
 ```
 ## Gabriel Pereira (GP) has more students with little alcohol consumption
-
 
 
